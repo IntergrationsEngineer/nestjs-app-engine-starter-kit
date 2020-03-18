@@ -10,6 +10,7 @@ import { UserService } from '../user/user.service';
 import { UserDto } from '../user/dto/UserDto';
 import { ContextService } from '../../providers/context.service';
 import { TokenPayloadDto } from './dto/TokenPayloadDto';
+import { RedisService } from '../../shared/services/redis.service';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +20,7 @@ export class AuthService {
         public readonly jwtService: JwtService,
         public readonly configService: ConfigService,
         public readonly userService: UserService,
+        public readonly redisService: RedisService
     ) {}
 
     async createToken(user: UserEntity | UserDto): Promise<TokenPayloadDto> {
@@ -39,6 +41,8 @@ export class AuthService {
         if (!user || !isPasswordValid) {
             throw new UserNotFoundException();
         }
+        const savedUserEntity = await this.redisService.setEx(userEntity.id, 400, JSON.stringify(userEntity))
+        console.log('[savedUserEntity]', savedUserEntity);
         return user;
     }
 

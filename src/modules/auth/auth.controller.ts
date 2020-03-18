@@ -28,14 +28,15 @@ import { AuthService } from './auth.service';
 import { LoginPayloadDto } from './dto/LoginPayloadDto';
 import { UserLoginDto } from './dto/UserLoginDto';
 import { UserRegisterDto } from './dto/UserRegisterDto';
+import { RedisService } from '../../shared/services/redis.service';
 
 @Controller('auth')
 @ApiUseTags('auth')
 export class AuthController {
     constructor(
         public readonly userService: UserService,
-        public readonly authService: AuthService,
-    ) {}
+        public readonly authService: AuthService
+    ) { }
 
     @Post('login')
     @HttpCode(HttpStatus.OK)
@@ -46,8 +47,7 @@ export class AuthController {
     async userLogin(
         @Body() userLoginDto: UserLoginDto,
     ): Promise<LoginPayloadDto> {
-        const userEntity = await this.authService.validateUser(userLoginDto);
-
+        const userEntity = await this.authService.validateUser(userLoginDto);     
         const token = await this.authService.createToken(userEntity);
         return new LoginPayloadDto(userEntity.toDto(), token);
     }

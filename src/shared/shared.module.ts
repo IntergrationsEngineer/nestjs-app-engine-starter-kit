@@ -5,12 +5,14 @@ import { AwsS3Service } from './services/aws-s3.service';
 import { ConfigService } from './services/config.service';
 import { GeneratorService } from './services/generator.service';
 import { ValidatorService } from './services/validator.service';
+import { RedisService } from './services/redis.service';
 
 const providers = [
     ConfigService,
     ValidatorService,
     AwsS3Service,
     GeneratorService,
+    RedisService
 ];
 
 @Global()
@@ -22,10 +24,9 @@ const providers = [
             imports: [SharedModule],
             useFactory: (configService: ConfigService) => ({
                 secret: configService.get('JWT_SECRET_KEY'),
-                // if you want to use token with expiration date
-                // signOptions: {
-                //     expiresIn: configService.getNumber('JWT_EXPIRATION_TIME'),
-                // },
+                signOptions: {
+                    expiresIn: configService.getNumber('JWT_EXPIRATION_TIME'),
+                },
             }),
             inject: [ConfigService],
         }),
