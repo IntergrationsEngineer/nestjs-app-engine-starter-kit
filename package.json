@@ -8,8 +8,10 @@
         "node": ">=10.0.0"
     },
     "scripts": {
-        "build": "tsc -p tsconfig.build.json",
+        "build": "rimraf dist && tsc -p tsconfig.build.json",
+        "gcp-build": "npm run build",
         "format": "prettier --write \"src/**/*.ts\"",
+        "start": "node dist/main.js",
         "start:hmr": "node dist/main",
         "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
         "migration:generate": "ts-node node_modules/typeorm/cli.js migration:generate -f ormconfig -d src/migrations -n",
@@ -59,6 +61,7 @@
         "redis": "^3.0.2",
         "reflect-metadata": "~0.1.13",
         "request-context": "~2.0.0",
+        "rimraf": "^3.0.2",
         "rxjs": "^6.5.3",
         "source-map-support": "^0.5.13",
         "swagger-ui-express": "^4.1.2",
