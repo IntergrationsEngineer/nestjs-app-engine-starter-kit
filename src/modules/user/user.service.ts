@@ -17,7 +17,7 @@ export class UserService {
         public readonly userRepository: UserRepository,
         public readonly validatorService: ValidatorService,
         public readonly awsS3Service: AwsS3Service,
-    ) {}
+    ) { }
 
     /**
      * Find single user
@@ -57,7 +57,7 @@ export class UserService {
             avatar = await this.awsS3Service.uploadImage(file);
         }
 
-        const user = this.userRepository.create({ ...userRegisterDto, avatar });
+        const user = this.userRepository.create(userRegisterDto);
 
         return this.userRepository.save(user);
     }
