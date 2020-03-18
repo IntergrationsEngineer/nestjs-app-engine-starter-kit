@@ -3,6 +3,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { IAwsConfig } from '../../interfaces/IAwsConfig';
 import { SnakeNamingStrategy } from '../../snake-naming.strategy';
+import { IRedisConfig } from '../../interfaces/IRedisConfig';
 
 export class ConfigService {
     constructor() {
@@ -91,6 +92,13 @@ export class ConfigService {
             accessKeyId: this.get('AWS_S3_ACCESS_KEY_ID'),
             secretAccessKey: this.get('AWS_S3_SECRET_ACCESS_KEY'),
             bucketName: this.get('S3_BUCKET_NAME'),
+        };
+    }
+
+    get redisConfig(): IRedisConfig {
+        return {
+            redisHost: this.get('REDIS_HOST'),
+            redisPort: this.getNumber('REDIS_PORT'),
         };
     }
 }
