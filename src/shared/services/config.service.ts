@@ -8,7 +8,7 @@ export class ConfigService {
     constructor() {
         const nodeEnv = this.nodeEnv;
         dotenv.config({
-            path: `.${nodeEnv}.env`,
+            path: `${nodeEnv}.env`,
         });
 
         // Replace \\n with \n to support multiline strings in AWS
