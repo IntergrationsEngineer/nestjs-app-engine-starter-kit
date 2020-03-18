@@ -34,7 +34,7 @@ export class UserRegisterDto {
     readonly password: string;
 
     @Column()
-    @IsPhoneNumber('ZZ')
+    @IsPhoneNumber('KE')
     @IsOptional()
     @ApiModelProperty()
     phone: string;
