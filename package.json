@@ -4,6 +4,9 @@
     "description": "NestJS App Engine Starter Kit, Typescript, Postgres, TypeORM",
     "author": "elijah onchwari <elijah@orteo.co>",
     "license": "MIT",
+    "engines": {
+        "node": ">=10.0.0"
+    },
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
         "format": "prettier --write \"src/**/*.ts\"",

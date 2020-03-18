@@ -41,8 +41,8 @@ export class AuthService {
         if (!user || !isPasswordValid) {
             throw new UserNotFoundException();
         }
-        const savedUserEntity = await this.redisService.setEx(userEntity.id, 400, JSON.stringify(userEntity))
-        console.log('[savedUserEntity]', savedUserEntity);
+        const savedUser = await this.redisService.setEx(user.id, 400, JSON.stringify(user))
+        console.log('[savedUserEntity]', savedUser);
         return user;
     }
 
