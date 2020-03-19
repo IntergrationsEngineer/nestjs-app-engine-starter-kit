@@ -25,8 +25,8 @@ import { UserService } from './user.service';
 
 @Controller('users')
 @ApiUseTags('users')
-@UseGuards(AuthGuard, RolesGuard)
-@UseInterceptors(AuthUserInterceptor)
+// @UseGuards(AuthGuard, RolesGuard)
+// @UseInterceptors(AuthUserInterceptor)
 @ApiBearerAuth()
 export class UserController {
     constructor(private _userService: UserService) {}
