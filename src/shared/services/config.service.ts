@@ -62,6 +62,7 @@ export class ConfigService {
             entities,
             migrations,
             keepConnectionAlive: true,
+            extra:{ socketPath: this.get('INSTANCE_CONNECTION_NAME')},
             type: 'postgres',
             replication: {
                 master: {
